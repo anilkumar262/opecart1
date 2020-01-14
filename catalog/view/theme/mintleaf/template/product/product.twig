@@ -245,15 +245,17 @@
             <div class="clearfix">
               <div class="form-inline">
                 <div class="form-group pull-left-lg pull-left-md pull-left-sm">
-                  <label class="control-label" for="input-quantity">{{ entry_qty }}</label>
+                  {# <label class="control-label" for="input-quantity">{{ entry_qty }}</label> #}
                   <input type="hidden" name="quantity" value="{{ minimum }}" size="2" id="input-quantity" class="form-control" />
                   <input type="hidden" name="product_id" value="{{ product_id }}" />
                 </div>
               </div>            
               <div class="button-group product-info-cart-btns-wrap pull-left-lg pull-left-md pull-left-sm">
+                {% if logged %}
                 <button type="button" id="button-cart" data-loading-text="{{ text_loading }}" class="btn btn-cart animation"><i class="fa fa-shopping-cart"></i> {{ button_cart }}</button>
                 <button type="button" data-toggle="tooltip" class="btn btn-wishlist animation" title="{{ button_wishlist }}" onclick="wishlist.add('{{ product_id }}');"><i class="fa fa-heart"></i></button>
-                <button type="button" data-toggle="tooltip" class="btn btn-compare animation" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange"></i></button>
+                {% endif %}
+                {# <button type="button" data-toggle="tooltip" class="btn btn-compare animation" title="{{ button_compare }}" onclick="compare.add('{{ product_id }}');"><i class="fa fa-exchange"></i></button> #}
               </div>
             </div>
             {% if minimum > 1 %}

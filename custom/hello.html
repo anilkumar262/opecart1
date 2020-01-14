@@ -1,0 +1,20 @@
+<script>
+
+    $("#enq_form").click(function(){
+        var name= $('#enq_name').val();
+        var phnum= $('#enq_phnum').val();
+        $.ajax({
+            url : '/opencart/custom/enquiry.php',
+            type: 'POST',
+            dataType: "text",
+            data :{
+                name: name,
+                phnum:phnum
+            },
+            success:function(data){
+                alert(data);
+            }
+        });
+    });
+
+</script>

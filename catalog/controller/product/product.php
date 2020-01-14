@@ -390,6 +390,12 @@ class ControllerProductProduct extends Controller {
 					$price = false;
 				}
 
+				if ($this->customer->isLogged()) {
+					$data['logged'] = true;
+				} else {
+					$data['logged'] = false;
+				}
+
 				if ((float)$result['special']) {
 					$special = $this->currency->format($this->tax->calculate($result['special'], $result['tax_class_id'], $this->config->get('config_tax')), $this->session->data['currency']);
 				} else {
