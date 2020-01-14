@@ -1,0 +1,1028 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-category" data-toggle="tooltip" title="{{ button_save }}" id="save" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+  <div class="alert alert-danger alert-dismissible" style="display: none;" id="alert"><i class="fa fa-exclamation-circle"></i> &nbsp;{{ alert }}
+      <!--button type="button" class="close" data-dismiss="alert">&times;</button-->
+    </div>
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-category" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+            <li><a href="#tab-data" data-toggle="tab">{{ tab_data }}</a></li>
+            <li><a href="#tab-design" data-toggle="tab">{{ tab_design }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-general">
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-name">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" autocomplete="off" name="name" value="{{ name }}" placeholder="Name" id="input-name" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-description">{{ entry_description }}</label>
+                <div class="col-sm-10">
+                  <textarea autocomplete="off" name="description" placeholder="{{ entry_description }}" id="input-description" class="form-control">{{ description }}</textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="status" id="input-status" class="form-control">
+                    {% if status %}
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                    {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="tab-data">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input_parent_block">Parent Block</label>
+                <div class="col-sm-10">
+                   <select name="parent_id" id="input_parent_block" class="form-control">
+                     <option value="0">Root</option>
+                     {% for block in parent_blocks %}
+                    <option value="{{ block.id }}" {% if parent_id == block.id %} selected="selected" {% endif %}>{{ block.name }}</option>
+                     {% endfor %}
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-block-type">Block type</label>
+                <div class="col-sm-10">
+                  <select name="block_type"  id="input-block_type" class="form-control">
+                        <option value="home" 
+                          {% if block_type == 'home' %} selected="selected" {% endif %}>Home
+                        </option>
+                        <option value="menu"
+                          {% if block_type == 'menu' %} selected="selected" {% endif %}>Menu
+                        </option>
+                        <option value="banner_block" 
+                          {% if block_type == 'banner_block' %} selected="selected" {% endif %}>Banner Block
+                        </option>
+                        <option value="category_block"
+                          {% if block_type == 'category_block' %} selected="selected" {% endif %}>Category Block
+                        </option>
+                        <option value="product_block" 
+                          {% if block_type == 'product_block' %} selected="selected" {% endif %}>Product Block
+                        </option>
+                        <option value="banner" 
+                          {% if block_type == 'banner' %} selected="selected" {% endif %}>Banner
+                        </option>
+                        <option value="flash_sale" 
+                          {% if block_type == 'flash_sale' %} selected="selected" {% endif %}>Flash Sale
+                        </option>
+                        <option value="" 
+                           {% if block_type == '' %} selected="selected" {% endif %} hidden="true">Select
+                        </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" id="div_link_type">
+                <label class="col-sm-2 control-label" for="input-link-type">Link type</label>
+                <div class="col-sm-10">
+                  <select name="link_type" id="input-link_type" class="form-control">
+                    <option value="product" {% if link_type == 'product' %} selected="selected" {% endif %}>Product</option>
+                    <option value="category" {% if link_type == 'category' %} selected="selected" {% endif %}>Category</option>
+                    <option value="block" {% if link_type == 'block' %} selected="selected" {% endif %}>Block</option>
+                    <option value=""  {% if link_type == '' %} selected="selected" {% endif %} hidden>Select</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" id="div_link_id">
+                <label class="col-sm-2 control-label" for="input-link-id">ID</label>
+                <div class="col-sm-10">
+                  <input type="text" autocomplete="off" name="link_id" value="{{ link_id }}" placeholder="eg:product/category&path=25_29" id="input-link-id" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group" id="div_image">
+                <label class="col-sm-2 control-label">{{ entry_image }}</label>
+                <div class="col-sm-10">
+                    <a href="" id="thumb-image" data-toggle="image" class="img-thumbnail">
+                    <img src="{{ thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" class="attachment_preview" id="attachment_preview" /></a>
+                    <input type="hidden" name="image_url" value="{{ image_url }}" id="input-image" />
+                </div>
+              </div>
+
+               <div class="form-group" id="div_image_width">
+                <label class="col-sm-2 control-label" for="input-image-width">Image Width</label>
+                <div class="col-sm-10">
+                  <input type="number" autocomplete="off" name="image_width" value="{{ image_width }}" placeholder="0" id="input-image-width" class="form-control" />
+                </div>
+              </div>
+
+               <div class="form-group" id="div_image_height">
+                <label class="col-sm-2 control-label" for="input-image-height">Image Height</label>
+                <div class="col-sm-10">
+                  <input type="number" autocomplete="off" name="image_height" value="{{ image_height }}" placeholder="0" id="input-image-height" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group" id="div_sort_order">
+                <label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+                <div class="col-sm-10">
+                  <input type="number" name="sort_order" value="{{ sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group" id="div_end_time">
+                <label class="col-sm-2 control-label" for="input-end-time">End Time</label>
+                <div class="col-sm-3">
+                  <div class="input-group date">
+                    <input type="text" autocomplete="off" readonly name="end_time" value="{{ end_time }}" placeholder="Jun 30,2018 15:37:00" data-date-format="MMMM DD,YYYY   hh:mm:ss" id="input-end-time" class="form-control" />
+                    <span class="input-group-btn">
+                    <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tab-pane" id="tab-design">
+
+              <div class="form-group" id="div_border_radius">
+                <label class="col-sm-2 control-label" for="input-border-radius">Border Radius</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="border_radius" value="{{ border_radius }}" placeholder="0" id="input-border-radius" class="form-control" />
+                </div>
+
+                
+              </div>
+
+              <div class="form-group" id="div_margin_between">
+                <label class="col-sm-2 control-label" for="input_margin_between">Margin Between Item</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="margin_between" value="{{ margin_between }}" placeholder="0" id="input_margin_between" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group" id="div_width">
+                <label class="col-sm-2 control-label" for="input_width">Width</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="width" value="{{ width }}" placeholder="0" id="input_width" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group" id="div_margin_top">
+                <label class="col-sm-2 control-label" for="input-margin-top">Margin Top</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="margin_top" value="{{ margin_top }}" placeholder="0" id="input-margin-top" class="form-control" />
+                </div>
+
+                
+              </div>
+
+              <div class="form-group" id="div_margin_right">
+                <label class="col-sm-2 control-label" for="input-margin-right">Margin Right</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="margin_right" value="{{ margin_right }}" placeholder="0" id="input-margin-right" class="form-control" />
+                </div>
+
+                
+              </div> 
+
+              <div class="form-group" id="div_margin_bottom">
+                <label class="col-sm-2 control-label" for="input-margin-bottom">Margin Bottom</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="margin_bottom" value="{{ margin_bottom }}" placeholder="0" id="input-margin-bottom" class="form-control" />
+                </div>
+
+                
+              </div>  
+
+              <div class="form-group" id="div_margin_left">
+                <label class="col-sm-2 control-label" for="input-margin-left">Margin Left</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="margin_left" value="{{ margin_left }}" placeholder="0" id="input-margin-left" class="form-control" />
+                </div>
+
+                
+              </div>
+
+
+              <div class="form-group" id="div_padding_top">
+                <label class="col-sm-2 control-label" for="input-padding-top">Padding Top</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="padding_top" value="{{ padding_top }}" placeholder="0" id="input-padding-top" class="form-control" />
+                </div>
+
+                
+              </div>
+
+              <div class="form-group" id="div_padding_right">
+                <label class="col-sm-2 control-label" for="input-padding-right">Padding Right</label>
+                <div class="col-sm-2">
+                  <input type="number"  autocomplete="off" name="padding_right" value="{{ padding_right }}" placeholder="0" id="input-padding-right" class="form-control" />
+                </div>
+
+                
+              </div> 
+
+              <div class="form-group" id="div_padding_bottom">
+                <label class="col-sm-2 control-label" for="input-padding-bottom">Padding Bottom</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="padding_bottom" value="{{ padding_bottom }}" placeholder="0" id="input-padding-bottom" class="form-control" />
+                </div>
+
+                
+              </div>  
+
+              <div class="form-group" id="div_padding_left">
+                <label class="col-sm-2 control-label" for="input-padding-left">Padding Left</label>
+                <div class="col-sm-2">
+                  <input type="number" autocomplete="off" name="padding_left" value="{{ padding_left }}" placeholder="0" id="input-padding-left" class="form-control" />
+                </div>
+
+                
+              </div>
+
+              <div class="form-group" id="div_layout">
+                <label class="col-sm-2 control-label">Layout</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    <input type="radio" name="layout"  id="layout_slider" value="slider" {% if layout == 'slider' %} checked="checked" {% endif %} />
+                    Slider
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="layout"  id="layout_grid" value="grid" {% if layout == 'grid' %} checked="checked" {% endif %} />
+                    Grid
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" name="layout" id="layout_scroll" value="scroll" {% if layout == 'scroll' %} checked="checked" {% endif %} />
+                    Scroll
+                  </label>
+                </div>
+              </div>
+
+              <!--div class="form-group" id="div_grid_col">
+                <label class="col-sm-2 control-label" for="input-grid-col">Grid Column</label>
+                <div class="col-sm-10">
+                  <input type="number" name="layout_grid_col" value="{{ layout_grid_col }}" placeholder="2" id="input-grid-col" class="form-control"/>
+                </div>
+              </div-->  
+
+              <div class="form-group" id="div_grid_col">
+                <label class="col-sm-2 control-label" for="input-grid-col">Grid Column</label>
+                <div class="col-sm-10">
+
+                  <select name="layout_grid_col" id="input-grid-col" class="form-control">
+                     <option value="one" {% if layout_grid_col == 'one' %} selected="selected" {% endif %}>1</option>
+                     <option value="two"{% if layout_grid_col == 'two' %} selected="selected" {% endif %}>2</option>
+                     <option value="three" {% if layout_grid_col == 'three' %} selected="selected" {% endif %}>3</option>
+                     <option value="four"{% if layout_grid_col == 'four' %} selected="selected" {% endif %}>4</option>
+                  </select>
+
+                </div>
+              </div>
+
+              <div class="form-group" id="div_shape">
+                <label class="col-sm-2 control-label" for="input-shape">Shape</label>
+                <div class="col-sm-2">
+                  <select name="shape" id="input-shape" class="form-control">
+
+                   <option value="square" {% if shape == 'square' %} selected="selected" {% endif %}>Square</option>
+                   <option value="circular"{% if shape == 'circular' %} selected="selected" {% endif %}>Circular</option>
+
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" id="div_card_style">
+                <label class="col-sm-2 control-label" for="input-card-style">Card Style</label>
+                <div class="col-sm-2">
+                   <select name="card_style" id="input-card_style" class="form-control">
+                    <option value="card_ios" {% if card_style == 'card_ios' %} selected="selected" {% endif %}>
+                     Card MD
+                    </option>
+                    <option value="card_md" {% if card_style == 'card_md' %} selected="selected" {% endif %}>
+                     Card IOS
+                    </option>
+                     <option value="noshadow"{% if card_style == 'noshadow' %} selected="selected" {% endif %}>
+                     Card Without Shadow</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group" id="div_header_align">
+                <label class="col-sm-2 control-label" for="input-header-align">Header Align</label>
+                <div class="col-sm-2">
+                  <select name="header_align" id="input-header_align" class="form-control">
+
+                   <option value="none" {% if header_align == 'none' %} selected="selected" {% endif %}>
+
+                                                          None
+                   </option>
+
+                   <option value="top_left" {% if header_align == 'top_left' %} selected="selected" {% endif %}>
+
+                                                          Top Left
+                   </option>
+
+                   <option value="top_center"{% if header_align == 'top_center' %} selected="selected" {% endif %}>
+
+                                                          Top Center
+                   </option>
+
+                   <option value="top_right" {% if header_align == 'top_right' %} selected="selected" {% endif %}>
+
+                                                          Top Right
+                   </option>
+
+                   <option value="left_floating"{% if header_align == 'left_floating' %} selected="selected" {% endif %}>
+
+                                                          Left Floating
+                   </option>
+
+                </select>
+                </div>
+              </div>
+
+              <div class="form-group" id="div_text_color">
+                <label class="col-sm-2 control-label" for="input-text-color">Text Color</label>
+                <div class="col-sm-2">
+                  <input type="color" name="text_color" value="{{ text_color }}" placeholder="2" id="input-text-color" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group" id="div_background_color">
+                <label class="col-sm-2 control-label" for="input-background-color">Background Color</label>
+                <div class="col-sm-2">
+                  <input type="color" name="bg_color" value="{{ bg_color }}" placeholder="2" id="input-background-color" class="form-control" />
+                </div>
+              </div>
+              
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <style type="text/css">
+    
+.red::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+   color: red;
+   opacity: 0.8; /* Firefox */
+}
+
+  </style>
+  <link href="view/javascript/codemirror/lib/codemirror.css" rel="stylesheet" />
+  <link href="view/javascript/codemirror/theme/monokai.css" rel="stylesheet" />
+  <script type="text/javascript" src="view/javascript/codemirror/lib/codemirror.js"></script> 
+  <script type="text/javascript" src="view/javascript/codemirror/lib/xml.js"></script> 
+  <script type="text/javascript" src="view/javascript/codemirror/lib/formatting.js"></script> 
+  
+  <script type="text/javascript" src="view/javascript/summernote/summernote.js"></script>
+  <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
+  <script type="text/javascript" src="view/javascript/summernote/summernote-image-attributes.js"></script>
+  <script type="text/javascript" src="view/javascript/summernote/opencart.js"></script>
+  
+  <script type="text/javascript"><!--
+$('input[name=\'path\']').autocomplete({
+  'source': function(request, response) {
+    $.ajax({
+      url: 'index.php?route=catalog/category/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+      dataType: 'json',
+      success: function(json) {
+        json.unshift({
+          category_id: 0,
+          name: '{{ text_none }}'
+        });
+
+        response($.map(json, function(item) {
+          return {
+            label: item['name'],
+            value: item['category_id']
+          }
+        }));
+      }
+    });
+  },
+  'select': function(item) {
+    $('input[name=\'path\']').val(item['label']);
+    $('input[name=\'parent_id\']').val(item['value']);
+  }
+});
+//--></script>
+  <script type="text/javascript"><!--
+$('input[name=\'filter\']').autocomplete({
+  'source': function(request, response) {
+    $.ajax({
+      url: 'index.php?route=catalog/filter/autocomplete&user_token={{ user_token }}&filter_name=' +  encodeURIComponent(request),
+      dataType: 'json',
+      success: function(json) {
+        response($.map(json, function(item) {
+          return {
+            label: item['name'],
+            value: item['filter_id']
+          }
+        }));
+      }
+    });
+  },
+  'select': function(item) {
+    $('input[name=\'filter\']').val('');
+
+    $('#category-filter' + item['value']).remove();
+
+    $('#category-filter').append('<div id="category-filter' + item['value'] + '"><i class="fa fa-minus-circle"></i> ' + item['label'] + '<input type="hidden" name="category_filter[]" value="' + item['value'] + '" /></div>');
+  }
+});
+
+$('#category-filter').delegate('.fa-minus-circle', 'click', function() {
+  $(this).parent().remove();
+});
+
+$('.date').datetimepicker({
+  language: '{{ datepicker }}',
+  pickDate: true,
+  pickTime: true,
+  pickSeconds: true,
+  sideBySide: true,
+  useSeconds: true,
+  showMeridian:false
+});
+//--></script>
+<script type="text/javascript"><!--
+$('#language a:first').tab('show');
+//--></script>
+
+<script type="text/javascript"><!--
+$('#form-category').submit(function() {
+    if ($.trim($("#input-name").val()) === "") {
+     $('#input-name').css("border","1px solid #f72f2b");
+     //$('#input-name').css("box-shadow","#f3250c 0px 0px 1px");
+     //$('#input-name').attr('placeholder', 'Name is required *');
+     //$("#input-name").addClass('red');
+     $("#alert").show(200);
+        return false;
+    }
+});
+
+
+ 
+$(document).ready(function(){
+    $("#alert").hide();
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").hide();
+    $("#div_margin_top").hide();
+    $("#div_margin_right").hide();
+    $("#div_margin_bottom").hide();
+    $("#div_margin_left").hide();
+    $("#div_padding_top").hide();
+    $("#div_padding_right").hide();
+    $("#div_padding_bottom").hide();
+    $("#div_padding_left").hide();
+    $("#div_border_radius").hide();
+    $("#div_margin_between").hide();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").hide();
+    $("#div_background_color").hide();
+   // $('select option:contains("Select")').prop('selected',true);
+    //$('select option:contains("Select")').prop('selected',true);
+
+  if ( $("#input-block_type").val() == "home"){ 
+
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").hide();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").hide();
+    $("#div_margin_between").hide();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").show();
+    $("#div_background_color").show(); 
+  
+  }
+
+  else if($("#input-block_type").val() == "menu") {
+
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").hide();
+    $("#div_margin_top").hide();
+    $("#div_margin_right").hide();
+    $("#div_margin_bottom").hide();
+    $("#div_margin_left").hide();
+    $("#div_padding_top").hide();
+    $("#div_padding_right").hide();
+    $("#div_padding_bottom").hide();
+    $("#div_padding_left").hide();
+    $("#div_border_radius").hide();
+    $("#div_margin_between").hide();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").hide();
+    $("#div_background_color").hide(); 
+  }
+
+  else if($("#input-block_type").val() == "banner_slider") {
+
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").show();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").hide();
+    $("#div_background_color").show(); 
+
+  }
+
+  else if($("#input-block_type").val() == "banner_block") {
+                                
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").show();
+    $("#div_layout").show();
+    $("#div_grid_col").hide();
+    $("#div_card_style").show();
+    $("#div_shape").hide();
+    $("#div_header_align").show();
+    $("#div_text_color").show();
+    $("#div_background_color").show(); 
+
+    if ($('#layout_grid').attr("checked") == "checked") {  $("#div_grid_col").show(); }
+    $('#layout_scroll').click(function(){ $("#div_grid_col").hide(); });
+    $('#layout_grid').click(function(){ $("#div_grid_col").show(); });                            
+  }
+
+  else if($("#input-block_type").val() == "category_block") {
+                    
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").show();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").show();
+    $("#div_layout").show();
+    $("#div_grid_col").hide();
+    $("#div_card_style").show();
+    $("#div_shape").hide();
+    $("#div_header_align").show();
+    $("#div_text_color").show();
+    $("#div_background_color").show();
+
+  }
+
+  else if($("#input-block_type").val() == "product_block") {
+                            
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").show();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").show();
+    $("#div_layout").show();
+    $("#div_grid_col").hide();
+    $("#div_card_style").show();
+    $("#div_shape").hide();
+    $("#div_header_align").show();
+    $("#div_text_color").show();
+    $("#div_background_color").show();
+
+  }
+
+
+  else if($("#input-block_type").val() == "banner") {
+                                
+    $("#div_image").show();
+    $("#div_image_width").show();
+    $("#div_image_height").show();
+    $("#div_link_id").show();
+    $("#div_link_type").show();
+    $("#div_end_time").hide();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").show();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").hide();
+    $("#div_background_color").show(); 
+
+    $("#input-link_type").change(function() {
+
+       if($("#input-link_type").val() == "block") {
+
+        $("#div_link_id").hide();
+       }
+
+    });                  
+
+  }
+
+  else if($("#input-block_type").val() == "flash_sale") {
+                                                 
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").show();
+    $("#div_link_type").hide();
+    $("#div_end_time").show();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").show();
+    $("#div_layout").show();
+    $("#div_grid_col").show();
+    $("#div_card_style").show();
+    $("#div_shape").hide();
+    $("#div_header_align").show();
+    $("#div_text_color").show();
+    $("#div_background_color").show();
+
+  }
+
+  $("#input-block_type").change(function() {
+
+    if ( $(this).val() == "home"){ 
+
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").hide();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").hide();
+    $("#div_margin_between").hide();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").show();
+    $("#div_background_color").show(); 
+    }
+
+    else if($(this).val() == "menu") {
+
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").hide();
+    $("#div_margin_top").hide();
+    $("#div_margin_right").hide();
+    $("#div_margin_bottom").hide();
+    $("#div_margin_left").hide();
+    $("#div_padding_top").hide();
+    $("#div_padding_right").hide();
+    $("#div_padding_bottom").hide();
+    $("#div_padding_left").hide();
+    $("#div_border_radius").hide();
+    $("#div_margin_between").hide();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").hide();
+    $("#div_background_color").hide(); 
+    }
+
+    else if($(this).val() == "banner_slider") {
+
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").show();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").hide();
+    $("#div_background_color").show(); 
+      
+    }
+
+    else if($(this).val() == "banner_block") {
+                                
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").hide();
+    $("#div_link_type").hide();
+    $("#div_end_time").hide();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").hide();
+    $("#div_layout").show();
+    $("#div_grid_col").hide();
+    $("#div_card_style").show();
+    $("#div_shape").hide();
+    $("#div_header_align").show();
+    $("#div_text_color").show();
+    $("#div_background_color").show();
+
+    $('#layout_grid').click(function(){$("#div_grid_col").show();});
+    $('#layout_scroll').click(function(){$("#div_grid_col").hide();});
+    }
+
+    else if($(this).val() == "category_block") {
+                    
+      $("#div_image").hide();
+      $("#div_image_width").hide();
+      $("#div_image_height").hide();
+      $("#div_link_id").show();
+      $("#div_link_type").hide();
+      $("#div_end_time").hide();
+      $("#div_sort_order").show();
+      $("#div_margin_top").show();
+      $("#div_margin_right").show();
+      $("#div_margin_bottom").show();
+      $("#div_margin_left").show();
+      $("#div_padding_top").show();
+      $("#div_padding_right").show();
+      $("#div_padding_bottom").show();
+      $("#div_padding_left").show();
+      $("#div_border_radius").show();
+      $("#div_margin_between").show();
+      $("#div_layout").show();
+      $("#div_grid_col").hide();
+      $("#div_card_style").show();
+      $("#div_shape").hide();
+      $("#div_header_align").show();
+      $("#div_text_color").show();
+      $("#div_background_color").show();
+
+      $('#layout_grid').click(function(){$("#div_grid_col").hide();});
+      $('#layout_scroll').click(function(){$("#div_grid_col").hide();});
+
+    }
+
+    else if($("#input-block_type").val() == "product_block") {
+                            
+      $("#div_image").hide();
+      $("#div_image_width").hide();
+      $("#div_image_height").hide();
+      $("#div_link_id").show();
+      $("#div_link_type").hide();
+      $("#div_end_time").hide();
+      $("#div_sort_order").show();
+      $("#div_margin_top").show();
+      $("#div_margin_right").show();
+      $("#div_margin_bottom").show();
+      $("#div_margin_left").show();
+      $("#div_padding_top").show();
+      $("#div_padding_right").show();
+      $("#div_padding_bottom").show();
+      $("#div_padding_left").show();
+      $("#div_border_radius").show();
+      $("#div_margin_between").show();
+      $("#div_layout").show();
+      $("#div_grid_col").hide();
+      $("#div_card_style").show();
+      $("#div_shape").hide();
+      $("#div_header_align").show();
+      $("#div_text_color").show();
+      $("#div_background_color").show();
+
+   }
+
+    else if($(this).val() == "banner") {
+                                
+    $("#div_image").show();
+    $("#div_image_width").show();
+    $("#div_image_height").show();
+    $("#div_link_id").show();
+    $("#div_link_type").show();
+    $("#div_end_time").hide();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").hide();
+    $("#div_layout").hide();
+    $("#div_grid_col").hide();
+    $("#div_card_style").hide();
+    $("#div_shape").hide();
+    $("#div_header_align").hide();
+    $("#div_text_color").hide();
+    $("#div_background_color").show(); 
+    $('#attachment_preview').attr('src','{{thumb}}');
+
+    $("#input-link_type").change(function() {
+
+       if($("#input-link_type").val() == "block") {
+
+        $("#div_link_id").hide();
+       }
+       else if($("#input-link_type").val() != "block") {
+
+        $("#div_link_id").show();
+       }
+
+    });                                   
+
+
+    }
+
+    else if($(this).val() == "flash_sale") {
+                    
+    $("#div_image").hide();
+    $("#div_image_width").hide();
+    $("#div_image_height").hide();
+    $("#div_link_id").show();
+    $("#div_link_type").hide();
+    $("#div_end_time").show();
+    $("#div_sort_order").show();
+    $("#div_margin_top").show();
+    $("#div_margin_right").show();
+    $("#div_margin_bottom").show();
+    $("#div_margin_left").show();
+    $("#div_padding_top").show();
+    $("#div_padding_right").show();
+    $("#div_padding_bottom").show();
+    $("#div_padding_left").show();
+    $("#div_border_radius").show();
+    $("#div_margin_between").show();
+    $("#div_layout").show();
+    $("#div_grid_col").show();
+    $("#div_card_style").show();
+    $("#div_shape").hide();
+    $("#div_header_align").show();
+    $("#div_text_color").show();
+    $("#div_background_color").show();
+    }
+
+  });
+
+});
+//--></script>
+{{ footer }}

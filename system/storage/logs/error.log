@@ -1,0 +1,18 @@
+2019-10-25 16:16:18 - PHP Warning:  mysqli::__construct(): (HY000/1049): Unknown database 'opencart' in C:\wamp64\www\opencart\system\library\db\mysqli.php on line 7
+2019-10-25 16:16:18 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in C:\wamp64\www\opencart\system\library\db\mysqli.php on line 10
+2019-10-25 16:16:18 - PHP Warning:  DB\MySQLi::__construct(): Couldn't fetch mysqli in C:\wamp64\www\opencart\system\library\db\mysqli.php on line 10
+2019-10-25 16:16:18 - PHP Notice:  Undefined variable: mysql in C:\wamp64\www\opencart\install\controller\install\step_3.php on line 280
+2019-10-25 16:16:18 - PHP Notice:  Trying to get property 'connect_error' of non-object in C:\wamp64\www\opencart\install\controller\install\step_3.php on line 280
+2019-10-25 17:09:59 - PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp64\www\opencart\system\library\mail\mail.php on line 77
+2019-10-25 17:15:27 - PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp64\www\opencart\system\library\mail\mail.php on line 77
+2019-10-25 17:15:29 - PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp64\www\opencart\system\library\mail\mail.php on line 77
+2019-10-25 17:15:32 - PHP Notice:  Undefined index: payment_method in C:\wamp64\www\opencart\catalog\controller\extension\restapi\extension\payment\cod.php on line 10
+2019-10-25 17:15:32 - PHP Notice:  Undefined index: payment_method in C:\wamp64\www\opencart\catalog\controller\extension\restapi\extension\payment\cod.php on line 10
+2019-10-25 17:15:32 - PHP Notice:  Undefined index: payment_method in C:\wamp64\www\opencart\catalog\controller\extension\restapi\extension\payment\cod.php on line 10
+2019-10-25 17:15:33 - PHP Notice:  Undefined index: payment_method in C:\wamp64\www\opencart\catalog\controller\extension\restapi\extension\payment\cod.php on line 10
+2019-10-25 17:15:33 - PHP Notice:  Undefined index: payment_method in C:\wamp64\www\opencart\catalog\controller\extension\restapi\extension\payment\cod.php on line 10
+2019-10-25 17:15:33 - PHP Notice:  Undefined index: payment_method in C:\wamp64\www\opencart\catalog\controller\extension\restapi\extension\payment\cod.php on line 10
+2020-01-13 13:47:23 - PHP Warning:  unlink(C:/wamp64/www/opencart/system/storage/cache/cache.admin.language.1578916311): Permission denied in C:\wamp64\www\opencart\system\library\cache\file.php on line 17
+2020-01-13 13:47:23 - PHP Warning:  unlink(C:/wamp64/www/opencart/system/storage/cache/cache.information.1.1578914871): Permission denied in C:\wamp64\www\opencart\system\library\cache\file.php on line 17
+2020-01-13 13:47:23 - PHP Warning:  unlink(C:/wamp64/www/opencart/system/storage/cache/cache.store.1578916371): No such file or directory in C:\wamp64\www\opencart\system\library\cache\file.php on line 17
+2020-01-13 19:18:56 - PHP Warning:  mail(): Failed to connect to mailserver at &quot;localhost&quot; port 25, verify your &quot;SMTP&quot; and &quot;smtp_port&quot; setting in php.ini or use ini_set() in C:\wamp64\www\opencart\system\library\mail\mail.php on line 77

@@ -1,0 +1,5 @@
+1. Copy the files to /var/www folder
+2. Give write permissions to the folder uploads
+   a) Login as root
+   b) chmod -R 777 uploads
+3. Execute the code: http://localhost/folder/file.html

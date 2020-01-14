@@ -1,0 +1,1101 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-module" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-module" class="form-horizontal">
+
+          <ul class="nav nav-tabs">
+            <!--li ><a href="#tab-app-setting" data-toggle="tab">App settings</a></li-->
+            <li class="active"><a href="#tab-basic-setting" data-toggle="tab">Basic settings</a></li>
+            <li><a href="#tab-theme" data-toggle="tab">Theme</a></li>
+            <li><a href="#tab-dimensions" data-toggle="tab">Dimensions</a></li>
+            <!--li><a href="#tab-translation" data-toggle="tab">Translation</a></li-->
+            <li><a href="#tab-contents" data-toggle="tab">Contents</a></li>
+            <!--li><a href="#tab-build-app" data-toggle="tab">Build app</a></li-->
+            <li><a href="#tab-building-app" data-toggle="tab">Build app</a></li>
+            <li><a href="#tab-import-demo" data-toggle="tab">Import demo</a></li>
+          </ul>
+
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-app-setting">
+              
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="app_name">App Name</label>
+                <div class="col-sm-10">
+                  <input type="text" name="mstoreapp_app_name" value="{{ mstoreapp_app_name }}" placeholder="App Name" id="app_name" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="site_url">Site URL</label>
+                <div class="col-sm-10">
+                  <input type="text" name="mstoreapp_site_url" value="{{ mstoreapp_site_url }}" placeholder="Site URL" id="site_url" class="form-control" />
+                </div>
+              </div>
+
+               <div class="form-group">
+                <label class="col-sm-2 control-label" for="License_key">Product Code</label>
+                <div class="col-sm-10">
+                  <input type="text" name="mstoreapp_License_key" value="{{ mstoreapp_License_key }}" placeholder="Product Code" id="License_key" class="form-control" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="module_mstoreapp_status" id="input-status" class="form-control">
+                    {% if module_mstoreapp_status %}
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
+                    {% else %}
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+          
+          </div>
+
+        <div class="tab-pane" id="tab-basic-setting">
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_rate_app_ios">{{ entry_rate_app_ios }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_rate_app_ios" value="{{ mstoreapp_rate_app_ios }}" placeholder="{{ entry_rate_app_ios }}" id="input_rate_app_ios" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="rate_app_android">{{ entry_rate_app_android }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_rate_app_android" value="{{ mstoreapp_rate_app_android }}" placeholder="{{ entry_rate_app_android }}" id="rate_app_android" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_rate_app_windows">{{ entry_rate_app_windows }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_rate_app_windows" value="{{ mstoreapp_rate_app_windows }}" placeholder="{{ entry_rate_app_windows }}" id="input_rate_app_windows" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-height">{{ entry_share_app }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_share_app" value="{{ mstoreapp_share_app }}" placeholder="{{ entry_share_app }}" id="share_app" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_support_email ">{{ entry_support_email }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_support_email" value="{{ mstoreapp_support_email }}" placeholder="{{ entry_support_email }}" id="input_support_email" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_onesignal_app_id ">{{ entry_onesignal_app_id }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_onesignal_app_id" value="{{ mstoreapp_onesignal_app_id }}" placeholder="{{ entry_onesignal_app_id }}" id="input_onesignal_app_id" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_google_project_id ">{{ entry_google_project_id }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_google_project_id" value="{{ mstoreapp_google_project_id }}" placeholder="{{ entry_google_project_id }}" id="input_google_project_id" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_web_client_id ">{{ entry_web_client_id }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_web_client_id" value="{{ mstoreapp_web_client_id }}" placeholder="{{ entry_web_client_id }}" id="input_web_client_id" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_language ">{{ entry_language }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_language" value="{{ mstoreapp_language }}" placeholder="{{ entry_language }}" id="input_language" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_app_direction }}</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline"> {% if (direction == 'RTL') %}
+                    <input type="radio" name="direction" value="RTL" checked="checked" />
+                    RTL
+                    {% else %}
+                    <input type="radio" name="direction" value="RTL" />
+                    RTL
+                    {% endif %} </label>
+                  <label class="radio-inline"> {% if (direction != 'RTL') %}
+                    <input type="radio" name="direction" value="LTR" checked="checked" />
+                    LTR
+                    {% else %}
+                    <input type="radio" name="direction" value="LTR" />
+                    LTR
+                    {% endif %} </label>
+                </div>
+              </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_app_rate_windows_id ">{{ entry_app_rate_windows_id }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_app_rate_windows_id " value="{{ mstoreapp_app_rate_windows_id  }}" placeholder="{{ entry_app_rate_windows_id }}" id="input_app_rate_windows_id " class="form-control" />
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_share_app_message">{{ entry_share_app_message }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_share_app_message" value="{{ mstoreapp_share_app_message}}" placeholder="{{ entry_share_app_message }}" id="input_share_app_message" class="form-control" />
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_share_app_subject">{{ entry_share_app_subject }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_share_app_subject" value="{{ mstoreapp_share_app_subject}}" placeholder="{{ entry_share_app_subject }}" id="input_share_app_subject" class="form-control" />
+            </div>
+          </div> 
+
+         <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_google_sharing ">{{ entry_google_sharing }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_google_sharing " value="{{ mstoreapp_google_sharing }}" placeholder="{{ entry_google_sharing }}" id="input_google_sharing " class="form-control" />
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_chooser_title ">{{ entry_chooser_title }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_chooser_title" value="{{ mstoreapp_chooser_title }}" placeholder="{{ entry_chooser_title }}" id="input_chooser_title" class="form-control" />
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_web_link ">{{ entry_web_link }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_web_link" value="{{ mstoreapp_web_link }}" placeholder="{{ entry_web_link }}" id="input_web_link" class="form-control" />
+            </div>
+          </div> 
+
+         <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_phone ">{{ entry_phone }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_phone" value="{{ mstoreapp_phone }}" placeholder="{{ entry_phone }}" id="input_phone" class="form-control" />
+            </div>
+          </div> 
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_show_rate_app ">{{ entry_show_rate_app }}</label>
+            <div class="col-sm-10">
+              <div class="onoffswitch">{% if mstoreapp_show_rate_app %}
+              <input type="checkbox" name="mstoreapp_show_rate_app" class="onoffswitch-checkbox" id="input_show_rate_app" checked>
+              <label class="onoffswitch-label" for="input_show_rate_app">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+              </label>
+               {% else %}
+              <input type="checkbox" name="mstoreapp_show_rate_app" class="onoffswitch-checkbox" id="input_show_rate_app">
+              <label class="onoffswitch-label" for="input_show_rate_app">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+              </label>
+               {% endif %}
+              </div>
+            </div>
+          </div>
+
+           <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_show_share_app ">{{ entry_show_share_app }}</label>
+            <div class="col-sm-10">
+              <div class="onoffswitch">{% if mstoreapp_show_share_app %}
+              <input type="checkbox" name="mstoreapp_show_share_app" class="onoffswitch-checkbox" id="input_show_share_app" checked>
+              <label class="onoffswitch-label" for="input_show_share_app">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+              </label>
+               {% else %}
+              <input type="checkbox" name="mstoreapp_show_share_app" class="onoffswitch-checkbox" id="input_show_share_app">
+              <label class="onoffswitch-label" for="input_show_share_app">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+              </label>
+               {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_show_share_app ">{{ entry_show_contact }}</label>
+            <div class="col-sm-10">
+              <div class="onoffswitch">{% if mstoreapp_show_contact %}
+              <input type="checkbox" name="mstoreapp_show_contact" class="onoffswitch-checkbox" id="input_show_contact" checked>
+              <label class="onoffswitch-label" for="input_show_contact">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+              </label>
+               {% else %}
+              <input type="checkbox" name="mstoreapp_show_contact" class="onoffswitch-checkbox" id="input_show_contact">
+              <label class="onoffswitch-label" for="input_show_contact">
+              <span class="onoffswitch-inner"></span>
+              <span class="onoffswitch-switch"></span>
+              </label>
+               {% endif %}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_fb_url ">{{ entry_fb_url }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_fb_url" value="{{ mstoreapp_fb_url }}" placeholder="{{ entry_fb_url }}" id="input_fb_url" class="form-control" />
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_twitter_url">{{ entry_twitter_url }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_twitter_url" value="{{ mstoreapp_twitter_url }}" placeholder="{{ entry_twitter_url }}" id="input_twitter_url" class="form-control" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input_gp_url">{{ entry_gp_url }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="mstoreapp_gp_url" value="{{ mstoreapp_gp_url }}" placeholder="{{ entry_gp_url }}" id="input_gp_url" class="form-control" />
+            </div>
+          </div> 
+
+        </div>
+
+            <div class="tab-pane" id="tab-theme">
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="theme_Header">Header Color</label>
+                <div class="col-sm-10">
+                  <select name="mstoreapp_themeHeader" id="theme_Header" class="form-control">
+                    <option value="background" {% if mstoreapp_themeHeader == 'background' %} selected="selected"{% endif %}>Background</option>
+                    <option value="custom1" {% if mstoreapp_themeHeader == 'custom1' %} selected="selected"{% endif %}>Custom 1</option>
+                    <option value="custom2" {% if mstoreapp_themeHeader == 'custom2' %} selected="selected"{% endif %}>Custom 2</option>
+                    <option value="primary" {% if mstoreapp_themeHeader == 'primary' %} selected="selected"{% endif %}>Primary</option>
+                    <option value="secondary" {% if mstoreapp_themeHeader == 'secondary' %} selected="selected"{% endif %}>Secondary</option>
+                    <option value="tertiary" {% if mstoreapp_themeHeader == 'tertiary' %} selected="selected"{% endif %}>Tertiary</option>
+                    <option value="success" {% if mstoreapp_themeHeader == 'success' %} selected="selected"{% endif %}>Success</option>
+                    <option value="warning" {% if mstoreapp_themeHeader == 'warning' %} selected="selected"{% endif %}>Warning</option>
+                    <option value="dark" {% if mstoreapp_themeHeader == 'dark' %} selected="selected"{% endif %}>Dark</option>
+                    <option value="medium" {% if mstoreapp_themeHeader == 'medium' %} selected="selected"{% endif %}>Medium</option>
+                    <option value="light" {% if mstoreapp_themeHeader == 'light' %} selected="selected"{% endif %}>Light</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="theme_TabBar">Tab Bar Color</label>
+                <div class="col-sm-10">
+                  <select name="mstoreapp_themetabBar" id="theme_TabBar" class="form-control">
+                    <option value="background" {% if mstoreapp_themetabBar == 'background' %} selected="selected"{% endif %}>Background</option>
+                    <option value="custom1" {% if mstoreapp_themetabBar == 'custom1' %} selected="selected"{% endif %}>Custom 1</option>
+                    <option value="custom2" {% if mstoreapp_themetabBar == 'custom2' %} selected="selected"{% endif %}>Custom 2</option>
+                    <option value="primary" {% if mstoreapp_themetabBar == 'primary' %} selected="selected"{% endif %}>Primary</option>
+                    <option value="secondary" {% if mstoreapp_themetabBar == 'secondary' %} selected="selected"{% endif %}>Secondary</option>
+                    <option value="tertiary" {% if mstoreapp_themetabBar == 'tertiary' %} selected="selected"{% endif %}>Tertiary</option>
+                    <option value="success" {% if mstoreapp_themetabBar == 'success' %} selected="selected"{% endif %}>Success</option>
+                    <option value="warning" {% if mstoreapp_themetabBar == 'warning' %} selected="selected"{% endif %}>Warning</option>
+                    <option value="dark" {% if mstoreapp_themetabBar == 'dark' %} selected="selected"{% endif %}>Dark</option>
+                    <option value="medium" {% if mstoreapp_themetabBar == 'medium' %} selected="selected"{% endif %}>Medium</option>
+                    <option value="light" {% if mstoreapp_themetabBar == 'light' %} selected="selected"{% endif %}>Light</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="theme_Button">Button Color</label>
+                <div class="col-sm-10">
+                  <select name="mstoreapp_themeButton" value="{{ mstoreapp_themeButton }}" id="theme_Button" class="form-control">
+                    <option value="background" {% if mstoreapp_themeButton == 'background' %} selected="selected"{% endif %}>Background</option>
+                    <option value="custom1" {% if mstoreapp_themeButton == 'custom1' %} selected="selected"{% endif %}>Custom 1</option>
+                    <option value="custom2" {% if mstoreapp_themeButton == 'custom2' %} selected="selected"{% endif %}>Custom 2</option>
+                    <option value="primary" {% if mstoreapp_themeButton == 'primary' %} selected="selected"{% endif %}>Primary</option>
+                    <option value="secondary" {% if mstoreapp_themeButton == 'secondary' %} selected="selected"{% endif %}>Secondary</option>
+                    <option value="tertiary" {% if mstoreapp_themeButton == 'tertiary' %} selected="selected"{% endif %}>Tertiary</option>
+                    <option value="success" {% if mstoreapp_themeButton == 'success' %} selected="selected"{% endif %}>Success</option>
+                    <option value="warning" {% if mstoreapp_themeButton == 'warning' %} selected="selected"{% endif %}>Warning</option>
+                    <option value="dark" {% if mstoreapp_themeButton == 'dark' %} selected="selected"{% endif %}>Dark</option>
+                    <option value="medium" {% if mstoreapp_themeButton == 'medium' %} selected="selected"{% endif %}>Medium</option>
+                    <option value="light" {% if mstoreapp_themeButton == 'light' %} selected="selected"{% endif %}>Light</option>
+                  </select>
+                </div>
+              </div>
+
+
+            </div>
+
+
+            <div class="tab-pane" id="tab-dimensions">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="imageHeight">Product image height ratio</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="mstoreapp_imageHeight" value="{{ mstoreapp_imageHeight }}" placeholder="" id="imageHeight" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productSliderWidth">Width of product in scroll</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="mstoreapp_productSliderWidth" value="{{ mstoreapp_productSliderWidth }}" placeholder="" id="productSliderWidth" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productBorderRadius">Product border radius</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="mstoreapp_productBorderRadius" value="{{ mstoreapp_productBorderRadius }}" placeholder="" id="productBorderRadius" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productPadding">Width of between product</label>
+                  <div class="col-sm-2">
+                    <input type="number" name="mstoreapp_productPadding" value="{{ mstoreapp_productPadding }}" placeholder="" id="productPadding" class="form-control" />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="latestPerRow">Products per row in Home Screen</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_latestPerRow" id="latestPerRow" class="form-control">
+                      <option value="1" {% if mstoreapp_latestPerRow == 1 %} selected="selected"{% endif %}>1</option>
+                      <option value="2" {% if mstoreapp_latestPerRow == 2 %} selected="selected"{% endif %}>2</option>
+                      <option value="3" {% if mstoreapp_latestPerRow == 3 %} selected="selected"{% endif %}>3</option>
+                      <option value="4" {% if mstoreapp_latestPerRow == 4 %} selected="selected"{% endif %}>4</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productsPerRow">Products per row in Products Screen</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_productsPerRow" id="productsPerRow" class="form-control">
+                      <option value="1" {% if mstoreapp_productsPerRow == 1 %} selected="selected"{% endif %}>1</option>
+                      <option value="2" {% if mstoreapp_productsPerRow == 2 %} selected="selected"{% endif %}>2</option>
+                      <option value="3" {% if mstoreapp_productsPerRow == 3 %} selected="selected"{% endif %}>3</option>
+                      <option value="4" {% if mstoreapp_productsPerRow == 4 %} selected="selected"{% endif %}>4</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="searchPerRow">Products per row in Search Screen</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_searchPerRow" id="searchPerRow" class="form-control">
+                      <option value="1" {% if mstoreapp_searchPerRow == 1 %} selected="selected"{% endif %}>1</option>
+                      <option value="2" {% if mstoreapp_searchPerRow == 2 %} selected="selected"{% endif %}>2</option>
+                      <option value="3" {% if mstoreapp_searchPerRow == 3 %} selected="selected"{% endif %}>3</option>
+                      <option value="4" {% if mstoreapp_searchPerRow == 4 %} selected="selected"{% endif %}>4</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="productShadow">Products box shadow</label>
+                  <div class="col-sm-10">
+                    <select name="mstoreapp_productShadow" id="productShadow" class="form-control">
+                      <option value="shadow" {% if mstoreapp_productShadow == 'shadow' %} selected="selected"{% endif %}>Apply Shadow</option>
+                      <option value="noshadow" {% if mstoreapp_productShadow == 'noshadow' %} selected="selected"{% endif %}>Do not Apply Shadow</option>
+                    </select>
+                  </div>
+                </div>
+            </div>
+
+
+
+            <div class="tab-pane" id="tab-contents">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input_about_us ">About Us</label>
+                  <div class="col-sm-10">
+                  <div class="onoffswitch">{% if mstoreapp_about_us %}
+                    <input type="checkbox" name="mstoreapp_about_us" class="onoffswitch-checkbox" id="input_about_us" checked>
+                    <label class="onoffswitch-label" for="input_about_us">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                    </label>
+                     {% else %}
+                    <input type="checkbox" name="mstoreapp_about_us" class="onoffswitch-checkbox" id="input_about_us">
+                    <label class="onoffswitch-label" for="input_about_us">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                    </label>
+                     {% endif %}
+                  </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input_terms ">Terms And Conditions</label>
+                  <div class="col-sm-10">
+                  <div class="onoffswitch">{% if mstoreapp_terms %}
+                    <input type="checkbox" name="mstoreapp_terms" class="onoffswitch-checkbox" id="input_terms" checked>
+                    <label class="onoffswitch-label" for="input_terms">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                    </label>
+                     {% else %}
+                    <input type="checkbox" name="mstoreapp_terms" class="onoffswitch-checkbox" id="input_terms">
+                    <label class="onoffswitch-label" for="input_terms">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                    </label>
+                     {% endif %}
+                  </div>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input_terms ">Privacy And Policy</label>
+                  <div class="col-sm-10">
+                  <div class="onoffswitch">{% if mstoreapp_privacy_policy %}
+                    <input type="checkbox" name="mstoreapp_privacy_policy" class="onoffswitch-checkbox" id="input_privacy_policy" checked>
+                    <label class="onoffswitch-label" for="input_privacy_policy">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                    </label>
+                     {% else %}
+                    <input type="checkbox" name="mstoreapp_privacy_policy" class="onoffswitch-checkbox" id="input_privacy_policy">
+                    <label class="onoffswitch-label" for="input_privacy_policy">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                    </label>
+                     {% endif %}
+                  </div>
+                  </div>
+                </div>
+
+            </div>
+
+            <div class="tab-pane" id="tab-build-app">
+
+           
+                <input type="hidden" name="mstoreapp_license_key" value="{{ mstoreapp_License_key }}" placeholder="License Key" id="license_key" class="form-control" />
+            
+
+          
+                <input type="hidden" name="companyName" value="{{ mstoreapp_app_name }}" placeholder="company Name" id="companyName" class="form-control" />
+             
+
+             
+             
+                <input type="hidden" name="address" value="{{ mstoreapp_site_url }}" placeholder="Address" id="address" class="form-control" />
+             
+
+                <input type="hidden" name="orderId" value="{{ orderId }}" placeholder="Order Id" id="orderId" class="form-control" />
+             
+
+           
+                <input type="hidden" name="customerId" value="{{ customerId }}" placeholder="Order Id" id="customerId" class="form-control" />
+            
+
+           
+                <input type="hidden" name="productId" value="{{ productId }}" placeholder="Product Id" id="productId" class="form-control" />
+            
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Logo</label>
+                <div class="col-sm-10">
+                  <style>
+                  #fileSelector1 {
+                    background: #34A7C1;width:150px;height:30px;color:#fff;
+                  }
+
+                  .loader {
+                    border:7px solid #f3f3f3;
+                    border-radius: 50%;
+                    border-top: 7px solid #34A7C1;
+                    width: 50px;
+                    height: 50px;
+                    margin-left: 40px;
+                    margin-top: 20px;
+                    -webkit-animation: spin 2s linear infinite; /* Safari */
+                    animation: spin 2s linear infinite;
+                  }
+
+                  @-webkit-keyframes spin {
+                    0% { -webkit-transform: rotate(0deg); }
+                    100% { -webkit-transform: rotate(360deg); }
+                  }
+
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+
+                  #logopreview{
+                    max-height: 340px;max-width: 138px;padding: 5px;margin-bottom: 0;margin-top: 10px;margin-left: 15px;border: 1px solid #e3e3e3;background: #f7f7f7;-moz-border-radius: 3px;-khtml-border-radius: 3px;-webkit-border-radius: 3px;width:100px;
+                  }
+
+                  </style>
+                    <img  id="logopreview" src="{{thumb}}" class="img-thumbnail" style="width: 100px; height: 100px;margin-left: 25px;"><br><br>
+                    <label id="logoUploadlbl" style="width: 164px;height: 30px;vertical-align: top;" >Logo Image</label>
+                    <table id="utable" style="border: 5px solid #e3e3e3;max-height: 340px;max-width: 158px;margin-bottom: 15px">
+                    <td>
+                    <div class="loader"></div>
+                    <h2 id="hs" style="color:#006799;font-size: 15px;padding:15px 15px;">Uploading Logo..</h2></td> 
+                    </table>     
+                    <input type="file" id="logoUpload" accept="image/*" onchange="logoimage(this)">    
+                    <span id="logospan" style="margin-left: 35px;"></span><br><br>
+                    <span id="logospan1"></span>
+                    <span id="logospan2"></span>
+                          <td>
+       
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Splash</label>
+                <div class="col-sm-10">
+                <style>
+                  #fileSelector {
+                    background: #34A7C1;width:150px;height:30px;color:#fff;
+                  }
+
+                  .loader1 {
+                    border:7px solid #f3f3f3;
+                    border-radius: 50%;
+                    border-top: 7px solid #34A7C1;
+                    width: 50px;
+                    height: 50px;
+                    margin-left: 40px;
+                    margin-top: 20px;
+                    -webkit-animation: spin 2s linear infinite; /* Safari */
+                    animation: spin 2s linear infinite;
+                  }
+
+                  @-webkit-keyframes spin {
+                    0% { -webkit-transform: rotate(0deg); }
+                    100% { -webkit-transform: rotate(360deg); }
+                  }
+
+                  @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                  }
+
+                  #imgpreview{
+                  max-height: 340px;max-width: 138px;padding: 5px;margin-bottom: 0;margin-top: 10px;margin-left: 15px;border: 1px solid #e3e3e3;background: #f7f7f7;-moz-border-radius: 3px;-khtml-border-radius: 3px;-webkit-border-radius: 3px;width:100px;
+                  }
+                </style>
+                  <img id="imgpreview" src="{{thumb}}" style="width: 100px; height: 100px;margin-left: 25px;"><br><br>
+                  <label for="fileUpload" style="width: 164px;height: 30px;">Splash Image</label>
+                  <table  id="utable1" style="border: 5px solid #e3e3e3;max-height: 340px;max-width: 158px;margin-bottom: 15px">
+                  <td>
+                  <div class="loader1"></div>
+                  <h2 id="hs1" style="color:#006799;font-size:15px;padding:15px 15px;">Uploading Splash..</h2></td> 
+                  </table>
+                  <input type="file" id="fileUpload" accept="image/*" onchange="previewImage(this)">
+                  <span id="spnsplashPath" style="margin-left: 35px;"></span><br><br>
+                  <span id="spnsplashPath1"></span>
+                  <span id="spnsplashPath2"></span>
+                     
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="col-sm-2 control-label">Icon</label>
+                <div class="col-sm-10">
+                    <style>
+                    #fileSelector2 {
+                      background: #34A7C1;width:150px;height:30px;color:#fff;
+                    }
+
+                    .loader2 {
+                      border:7px solid #f3f3f3;
+                      border-radius: 50%;
+                      border-top: 7px solid #34A7C1;
+                      width: 50px;
+                      height: 50px;
+                      margin-left: 40px;
+                      margin-top: 20px;
+                      -webkit-animation: spin 2s linear infinite; /* Safari */
+                      animation: spin 2s linear infinite;
+                    }
+
+                    @-webkit-keyframes spin {
+                    0% { -webkit-transform: rotate(0deg); }
+                    100% { -webkit-transform: rotate(360deg); }
+                    }
+
+                   @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                    }
+
+                    #iconpreview{
+                      max-height: 340px;max-width: 138px;padding: 5px;margin-bottom: 0;margin-top: 10px;margin-left: 15px;border: 1px solid #e3e3e3;background: #f7f7f7;-moz-border-radius: 3px;-khtml-border-radius: 3px;-webkit-border-radius: 3px;width:100px;
+                    }
+
+                    </style>
+                    <img  id="iconpreview" src="{{thumb}}"class="img-thumbnail" style="width: 100px; height: 100px;margin-left: 25px;"><br><br>
+                    <label id="iconlabel" style="width: 164px;height: 30px;">Icon</label>
+                    <table  id="utable2" style="border: 5px solid #e3e3e3;max-height: 340px;max-width: 158px;margin-bottom: 15px" >
+                    <td>
+                    <div class="loader2"></div>
+                    <h2 id="hs2" style="color:#006799;font-size:15px;padding:15px 15px;">Uploading Icon..</h2>
+                    </td> 
+                    </table>
+                    <input type="file" id="iconupload" accept="image/*" onchange="iconimage(this)">
+                    <span id="iconspan" style="margin-left: 35px;"></span><br><br>
+                    <span id="iconspan1"></span>
+                    <span id="iconspan2"></span>    
+                </div>
+              </div>
+
+
+                  <input type="hidden" name="build_header_color" value="#ffffff" placeholder="Header Color" id="build_header_color" class="form-control" />
+
+
+
+                  <input type="hidden" name="build_button_color" value="#ffffff" placeholder="Header Color" id="build_button_color" class="form-control" />
+
+
+              <div class="form-group" style="border: 5px solid #fff;background-color: #fff;">
+                         <center> <h4 id="msg" class="title-success" style="padding: 10px;width: 500px;color: #green;border-radius: 50px;">Your settings has been saved Successfully,<br><br>let's build your app..</h4></center>
+                <div class="col-sm-2" style="margin:30px" >
+                  <table>
+                  <tr>
+                    <td style="padding-right: 10px;">
+                    <input style="margin-left:0px;width:100%;background-color:#34A7C1;color: #fff;" type="submit" name="submit" value="Save Settings"  id="save_button" class="form-control" />
+                    </td>
+                    <td style="padding-right: 10px;">
+                   <input style="margin-left:0px;width:100%;background-color:#34A7C1;color: #fff" type="submit" name="build" value="Build Android"  id="build_android" class="form-control" />
+                   </td>
+                   <td style="padding-right: 10px;">
+                    <input style="margin-left:0px;width:100%;background-color:#34A7C1;color: #fff" type="submit" name="download_apk" value="Download Apk"  id="download_apk" class="form-control" />
+                  </td>
+                </tr>
+                </table>
+                </div>
+              </div>
+          </div>
+
+           <div class="tab-pane" id="tab-building-app">
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="build_button"> </label>
+              <div class="col-sm-2">
+               <iframe id="myiFrame" src="https://mstoreapp.com/build-opencart/" style="border:0px #fff inset;" name="" scrolling="yes" align="center" height="1200" width="600"  frameborder="1">
+                </iframe>
+              </div>
+            </div>
+           </div>
+
+          <div class="tab-pane" id="tab-import-demo">
+              
+            <div class="form-group">
+              <label class="col-sm-2 control-label" for="demo-blocks">Demo Blocks</label>
+              <div class="col-sm-10">
+                <select name="mstoreapp_demo_blocks" id="demo-blocks" class="form-control">
+                  <option value="no" selected="selected">No</option>
+                  <option value="basic">Basic</option>
+                  <option value="fashion">Fashion</option>
+                </select>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        </form>     
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript"><!--
+ $(document).ready(function(){
+      $(".loader").hide();
+      $("#hs").hide();
+      $("#utable").hide();
+      $(".loader1").hide();
+      $("#hs1").hide();
+      $("#utable1").hide();
+      $(".loader2").hide();
+      $("#hs2").hide();
+      $("#utable2").hide();
+      $("#build_android").prop('disabled', true);
+      $("#build_android").css("background-color", "#fff");
+      $("#build_android").css("color", "#000");
+      $("#download_apk").prop('disabled', true);
+      $("#download_apk").css("background-color", "#fff");
+      $("#download_apk").css("color", "#000");
+      $("#msg").hide();
+       $.ajax({
+                type: 'post',
+                url: 'https://mainkart.com:8443/mstoreapp-showcase/wordpress/fillDetails',
+                data:{ licenceKey:$('#license_key').val(),
+                      companyName:$('#companyName').val(),
+                      address :$('#address').val(),
+                      orderId:$('#orderId').val(),
+                      customerId:$('#customerId').val(),
+                      productId:$('#productId').val(),
+                      headerColor:$('#build_header_color').val(),
+                      buttonColor:$('#build_button_color').val()
+                    },
+            success: function (result) {
+                $("#address").val(result.address);
+                $("#productId").val(result.productId);
+                $("#logopreview").attr("src",result.logoURL);
+                $("#imgpreview").attr("src",result.splashURL);
+                $("#iconpreview").attr("src",result.iconURL);
+                $("#build_button_color").val(result.buttonColor);
+                $("#build_header_color").val(result.headerColor);
+                $("#orderId").val(result.orderId);
+                $("#customerId").val(result.customerId);
+              }
+            });
+   });
+ //--></script>
+
+ <script type="text/javascript"><!--
+$(function () {
+  $('#save_button').on('click', function (e) {
+      e.preventDefault();
+      var app = $('#companyName'); 
+      console.log(app.val());
+  $.ajax({
+      type: 'post',
+      url: 'https://mainkart.com:8443/mstoreapp-showcase/wordpress/createOrder',
+      data:{ licenceKey:$('#license_key').val(),
+      companyName:$('#companyName').val(),
+      address :$('#address').val(),
+      orderId:$('#orderId').val(),
+      customerId:$('#customerId').val(),
+      productId:$('#productId').val(),
+      headerColor:$('#build_header_color').val(),
+      buttonColor:$('#build_button_color').val()
+},
+success: function (data) {
+if (app.val() != null && app.val() != '' ) {  
+    $("#save_button").prop('disabled', true);
+    $("#save_button").css("background-color", "#fff");
+    $("#save_button").css("color", "#000");
+    $("#build_android").prop('disabled', false);
+    $("#build_android").css("background-color", "#34A7C1");
+    $("#build_android").css("color", "#fff");
+    $("#msg").show();
+    $("#fileSelector").prop("disabled",false);
+    $("#fileSelector1").prop("disabled",false);
+    $("#fileSelector2").prop("disabled",false);
+    $("#companyName").prop("disabled",false);
+    $("#build_button_color").prop("disabled",false);
+    $("#build_header_color").prop("disabled",false);
+} else {  
+    $("#save_button").show();
+    $("#build_android").hide();
+}  
+}
+});
+
+});
+});
+  //--></script>
+<script type="text/javascript"><!--
+$(function () {
+            $("#build_android").click( function (e) {
+            $("#msg").text("Please wait ! this will take some time....");
+            $("#build_android").prop("disabled",true);
+                var formData1 = new FormData();
+                    formData1.append("orderId", orderId.value);
+                    formData1.append("customerId", customerId.value);
+                    formData1.append("productId", productId.value);
+                $.ajax({
+                    url: 'https://mainkart.com:8443/mstoreapp-showcase/wordpress/buildAndroid',
+                    type:"POST",
+                    processData:false,
+                    contentType: false,
+                    data: formData1,
+                    cache:false,
+                complete: function(){
+                    $("#msg").text("Your Android App has been built. Please Download below.");
+                    $("#msg").css("color", "#32373c");
+                    $("#msg").css("background-color", "#24f74873");
+                    $("#download_apk").prop("disabled",true);
+                    $("#build_android").prop("disabled",true);
+                    $("#build_android").css("background-color","#fff");
+                    $("#build_android").css("color","#000");
+                    $("#download_apk").prop("disabled",false);
+                    $("#download_apk").css("background-color","#34A7C1");
+                    $("#download_apk").css("color","#fff");
+                }
+                });
+                e.preventDefault();
+                });
+             });
+//--></script>
+<script type="text/javascript"><!--
+  $(function () {
+        $("#download_apk").click( function (e) {
+            window.open('https://mainkart.com:8443/mstoreapp-showcase/wordpress/downloadAndroid?customerId=' + customerId.value + '&productId=' + productId.value + '&orderId=' + orderId.value);
+        });
+        });
+//--></script>
+
+<script type="text/javascript"><!--
+
+var fileUpload1 = document.getElementById("logoUpload"),
+    uploadLabel = document.getElementById("logoUploadlbl"),
+    fileInsert1 = document.createElement("button");
+    fileInsert1.id = "fileSelector1";
+    fileInsert1.innerHTML = uploadLabel.innerHTML;
+    fileUpload1.parentNode.insertBefore(fileInsert1, fileUpload1.nextSibling);
+    fileUpload1.style.display = "none";
+    uploadLabel.style.display = "none";
+  fileInsert1.addEventListener('click', function(e){
+    e.preventDefault();
+    fileUpload1.click();
+}, false);
+
+function logoimage(input) {
+      var preview1 = document.getElementById('preview1');
+      var imgForm1 = document.getElementById('filehandler1');
+
+if (input.files && input.files[0]) {  
+      var reader1 = new FileReader();
+      reader1.onload = function(e) { 
+      $(".loader").show();
+      $("#hs").show();
+      $("#logopreview").hide();
+      $("#utable").show();
+      var image2 = new Image();
+      image2.src = e.target.result;
+      image2.onload=function(){
+      var height_logo = this.height;
+      var width_logo = this.width;
+
+if (height_logo < 192 || width_logo < 192) {
+      var logopreview = document.getElementById('logopreview');
+      document.getElementById("logospan").style.visibility="hidden";
+      document.getElementById("logospan1").style.visibility="hidden";
+      document.getElementById("logospan2").style.visibility="visible";
+      logo.innerHTML = "<h2 style='color:red;font-size: 15px'><b>Please Upload 192 x 192 px. </b></h2>" ;
+      logopreview.setAttribute('src', 'http://mstoreapp.com/assets/image/logo.png');
+      return false;
+}
+      document.getElementById("logospan").style.visibility="visible";
+      document.getElementById("logospan1").style.visibility="visible";
+      document.getElementById("logospan2").style.visibility="hidden";
+      var logopreview = document.getElementById('logopreview');
+      logopreview.setAttribute('src',e.target.result);
+      return true;
+};
+}
+      reader1.readAsDataURL(input.files[0]);
+      var fileName1 = fileUpload1.value.split('\\')[fileUpload1.value.split('\\').length - 1];
+      var formData = new FormData();
+      formData.append("orderId", orderId.value);
+      formData.append("customerId", customerId.value);
+      formData.append("productId", productId.value);
+      formData.append("imageType", 'logo');
+      formData.append("logo", input.files[0]);
+$.ajax({
+      url: 'https://mainkart.com:8443/mstoreapp-showcase/wordpress/uploadFile',
+      type:"POST",
+      processData:false,
+      contentType: false,
+      data: formData,
+      cache:false,
+complete: function(){
+      $(".loader").hide();
+      $("#logopreview").show();
+      $("#hs").hide();
+      $("#utable").hide();
+      //logospan.innerHTML = "<b>Selected Logo image: </b>" + fileName1 ;
+      logospan1.innerHTML = "<h2 style='color:#006799;font-size: 13px;font-family:cursive'><b>Logo Uploaded Successfully!!!</b></h2>" ;
+}
+});
+} 
+else {
+    logopreview.setAttribute('src', '');
+} 
+}
+//--></script>
+
+<script type="text/javascript"><!--
+    var fileUpload = document.getElementById("fileUpload"),
+    uploadLabel = document.querySelector("label[for='fileUpload']"),
+    fileInsert = document.createElement("button");
+    fileInsert.id = "fileSelector";
+    fileInsert.innerHTML = uploadLabel.innerHTML;
+    fileUpload.parentNode.insertBefore(fileInsert, fileUpload.nextSibling);
+    fileUpload.style.display = "none";
+    uploadLabel.style.display = "none";
+    fileInsert.addEventListener('click', function(e){
+    e.preventDefault();
+    fileUpload.click();
+}, false);
+
+function previewImage(input) {
+    var preview = document.getElementById('preview');
+    var imgForm = document.getElementById('filehandler');
+if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) { 
+    $(".loader1").show();
+    $("#hs1").show();
+    $("#imgpreview").hide();
+    $("#utable1").show();
+    var image = new Image();
+    image.src = e.target.result;
+    image.onload = function () {
+    var height = this.height;
+    var width = this.width;
+if (height < 2732 || width < 2732) {
+    var imgPreview = document.getElementById('imgpreview');
+    document.getElementById("spnsplashPath").style.visibility="hidden";
+    document.getElementById("spnsplashPath1").style.visibility="hidden";
+    document.getElementById("spnsplashPath2").style.visibility="visible";
+    spnsplashPath2.innerHTML = "<h2 style='color:red;font-size: 15px'><b>Please Upload 2732 x 2732 px. </b></h2>" ;
+    imgPreview.setAttribute('src', 'http://mstoreapp.com/assets/image/splash.png');
+    return false;
+}
+    document.getElementById("spnsplashPath").style.visibility="visible";
+    document.getElementById("spnsplashPath1").style.visibility="visible";
+    document.getElementById("spnsplashPath2").style.visibility="hidden"; 
+    var imgPreview = document.getElementById('imgpreview');
+    imgPreview.setAttribute('src',e.target.result);
+    return true;
+};
+}
+    reader.readAsDataURL(input.files[0]);
+    var fileName = fileUpload.value.split('\\')[fileUpload.value.split('\\').length - 1];
+    var formData1 = new FormData();
+    formData1.append("orderId", orderId.value);
+    formData1.append("customerId", customerId.value);
+    formData1.append("productId", productId.value);
+    formData1.append("imageType", 'splash');
+    formData1.append("splash", input.files[0]);
+
+$.ajax({
+    url: 'https://mainkart.com:8443/mstoreapp-showcase/wordpress/uploadFile',
+    type:"POST",
+    processData:false,
+    contentType: false,
+    data: formData1,
+    cache:false,
+complete: function(response){
+    $(".loader1").hide();
+    $("#imgpreview").show();
+    $("#hs1").hide();
+    $("#utable1").hide();
+    //spnsplashPath.innerHTML = "<b>Selected Splash image: </b>" + fileName;  
+    spnsplashPath1.innerHTML = "<h2 style='color:#006799;font-size:13px;font-family:cursive'><b>splash_image Uploaded Successfully!!! </b></h2>" ; 
+
+}
+});
+
+} 
+else 
+{
+    imgPreview.setAttribute('src', '');
+} 
+}
+//--></script>
+
+<script type="text/javascript"><!--
+    var iconupload = document.getElementById("iconupload"),
+    iconlabel = document.getElementById("iconlabel"),
+    iconinsert = document.createElement("button");
+    iconinsert.id = "fileSelector2";
+    iconinsert.innerHTML = iconlabel.innerHTML;
+    iconupload.parentNode.insertBefore(iconinsert, iconupload.nextSibling);
+    iconupload.style.display = "none";
+    iconlabel.style.display = "none";
+    iconinsert.addEventListener('click', function(e){
+    e.preventDefault();
+    iconupload.click();
+}, false);
+
+function iconimage(input) {
+    var icon_preview = document.getElementById('icon_preview');
+    var imgForm2 = document.getElementById('filehandler2');
+if (input.files && input.files[0]) {
+    var icon_reader = new FileReader();
+    icon_reader.onload = function(e) {
+    $(".loader2").show();
+    $("#hs2").show();
+    $("#iconpreview").hide();
+    $("#utable2").show();  
+    var im_con = new Image();
+    im_con.src = e.target.result;
+    im_con.onload = function () {
+    var height1 = this.height;
+    var width1 = this.width;
+if (height1 > 1024 || width1 > 1024) {
+    var iconpreview = document.getElementById('iconpreview');
+    document.getElementById("iconspan").style.visibility="hidden";
+    document.getElementById("iconspan1").style.visibility="hidden";
+    document.getElementById("iconspan2").style.visibility="visible";
+    iconspan2.innerHTML = "<h2 style='color:red;font-size: 15px'><b>Please Upload 1024 x 1024 px. </b></h2>" ;
+    iconpreview.setAttribute('src', 'http://mstoreapp.com/assets/image/icon.png');
+    return false;
+}   
+    document.getElementById("iconspan").style.visibility="visible";
+    document.getElementById("iconspan1").style.visibility="visible";
+    document.getElementById("iconspan2").style.visibility="hidden";
+    var iconpreview = document.getElementById('iconpreview');
+    iconpreview.setAttribute('src',e.target.result);
+    return true;
+};
+}
+icon_reader.readAsDataURL(input.files[0]);
+    var icon_filename = iconupload.value.split('\\')[iconupload.value.split('\\').length - 1];
+    var formData_icon = new FormData();
+    formData_icon.append("orderId", orderId.value);
+    formData_icon.append("customerId", customerId.value);
+    formData_icon.append("productId", productId.value);
+    formData_icon.append("imageType", 'icon');
+    formData_icon.append("icon", input.files[0]);
+$.ajax({
+    url: 'https://mainkart.com:8443/mstoreapp-showcase/wordpress/uploadFile',
+    type:"POST",
+    processData:false,
+    contentType: false,
+    data: formData_icon,
+    cache:false,
+complete: function(){
+    $(".loader2").hide();
+    $("#iconpreview").show();
+    $("#hs2").hide();
+    $("#utable2").hide();
+    //iconspan.innerHTML = "<b>Selected Icon image: </b>" + icon_filename ;
+    iconspan1.innerHTML = "<h2 style='color:#006799;font-size:13px;font-family:cursive'><b>Icon Uploaded Successfully!!! </b></h2>" ;
+}
+});
+} 
+else 
+{
+    iconpreview.setAttribute('src', '');
+} 
+}
+//--></script>
+{{ footer }}
